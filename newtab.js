@@ -102,12 +102,13 @@ document.getElementById('nextBtn').addEventListener('click', nextWord);
 init();
 
 // Auto-hide vocab overlay after 7 seconds
+// Auto-redirect to Google after 7 seconds
 setTimeout(() => {
-  document.getElementById('vocabOverlay').classList.add('hidden');
-  document.getElementById('normalTab').classList.add('visible');
-  document.getElementById('searchBox').focus();
+  document.getElementById('vocabOverlay').style.opacity = '0';
+  setTimeout(() => {
+    window.location.href = 'https://www.google.com';
+  }, 500);
 }, 7000);
-
 // Handle search
 document.getElementById('searchBox').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
