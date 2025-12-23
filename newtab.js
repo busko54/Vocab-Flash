@@ -1,0 +1,77 @@
+let wordsData = [];
+let currentWordIndex = 0;
+let stats = {
+  streak: 0,
+  wordsLearned: 0,
+  lastVisit: null
+};
+
+async function init() {
+  await loadWords();
+  await loadStats();
+  updateStreak();
+  displayWord();
+  updateProgress();
+}
+
+async function loadWords() {
+  const response = await fetch('words.json');
+  wordsData = await response.json();
+}
+
+async function loadStats() {
+  const result = await chrome.storage.local.get(['stats', 'currentIndex']);
+  if (result.stats) {
+    stats = result.stats;
+  }
+  if (result.currentIndex !== undefined) {
+    currentWordIndex = result.currentIndex;
+  }
+}
+
+function saveStats() {
+  chrome.storage.local.set({ 
+    stats: stats,
+    currentIndex: currentWordIndex 
+  });
+}
+
+function updateStreak() {
+  const today = new Date().toDateString();
+  const lastVisit = stats.lastVisit;
+
+  if (lastVisit === today) {
+    // Same day
+  } else if (isYesterday(lastVisit)) {
+    stats.streak++;
+  } else if (lastVisit) {
+    stats.streak = 1;
+  } else {
+    stats.streak = 1;
+  }
+
+  stats.lastVisit = today;
+  saveStats();
+  
+  document.getElementById('streak').textContent = stats.streak;
+  document.getElementById('wordsLearned').textContent = stats.wordsLearned;
+}
+
+function isYesterday(dateString) {
+  if (!dateString) return false;
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  return dateString === yesterday.toDateString();
+}
+
+function displayWord() {
+  const word = wordsData[currentWordIndex];
+  
+  document.getElementById('word').textContent = word.word;
+  document.getElementById('pronunciation').textContent = word.pronunciation;
+  document.getElementById('definition').textContent = word.definition;
+  document.getElementById('example').textContent = `"${word.example}"`;
+}
+
+function updateProgress() {
+  const progress = (stats
