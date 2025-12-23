@@ -103,12 +103,26 @@ init();
 
 // Auto-hide vocab overlay after 7 seconds
 // Auto-redirect to Google after 7 seconds
+// Auto-hide vocab overlay after 7 seconds and show search
 setTimeout(() => {
-  document.getElementById('vocabOverlay').style.opacity = '0';
-  setTimeout(() => {
-    window.location.href = 'https://www.google.com';
-  }, 500);
+  document.getElementById('vocabOverlay').classList.add('hidden');
+  document.getElementById('normalTab').classList.add('visible');
+  document.getElementById('searchBox').focus();
 }, 7000);
+
+// Handle search box
+document.getElementById('searchBox').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    const query = e.target.value;
+    if (query.includes('.') && !query.includes(' ')) {
+      // Looks like a URL
+      window.location.href = 'https://' + query;
+    } else {
+      // Search Google
+      window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+    }
+  }
+});
 // Handle search
 document.getElementById('searchBox').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
