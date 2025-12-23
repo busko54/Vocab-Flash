@@ -74,4 +74,29 @@ function displayWord() {
 }
 
 function updateProgress() {
-  const progress = (stats
+  const progress = (stats.wordsLearned / wordsData.length) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+}
+
+function pronounceWord() {
+  const word = wordsData[currentWordIndex].word;
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.rate = 0.8;
+  speechSynthesis.speak(utterance);
+}
+
+function nextWord() {
+  stats.wordsLearned++;
+  currentWordIndex = (currentWordIndex + 1) % wordsData.length;
+  
+  saveStats();
+  displayWord();
+  updateProgress();
+  
+  document.getElementById('wordsLearned').textContent = stats.wordsLearned;
+}
+
+document.getElementById('pronounceBtn').addEventListener('click', pronounceWord);
+document.getElementById('nextBtn').addEventListener('click', nextWord);
+
+init();
