@@ -2,34 +2,42 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>SAT Vocab</title>
+  <title>New Tab</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <div class="stats">
-      <div class="stat">
-        <span class="stat-number" id="streak">0</span>
-        <span class="stat-label">Day Streak</span>
+  <div id="vocabOverlay" class="overlay">
+    <div class="container">
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-number" id="streak">0</span>
+          <span class="stat-label">Day Streak</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" id="wordsLearned">0</span>
+          <span class="stat-label">Words Learned</span>
+        </div>
       </div>
-      <div class="stat">
-        <span class="stat-number" id="wordsLearned">0</span>
-        <span class="stat-label">Words Learned</span>
+
+      <div class="card">
+        <h1 id="word">Loading...</h1>
+        <div class="pronunciation" id="pronunciation"></div>
+        <div class="definition" id="definition"></div>
+        <div class="example" id="example"></div>
+        
+        <button id="pronounceBtn" class="btn-primary">🔊 Pronounce</button>
+        <button id="nextBtn" class="btn-secondary">Next Word →</button>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
       </div>
     </div>
+  </div>
 
-    <div class="card">
-      <h1 id="word">Loading...</h1>
-      <div class="pronunciation" id="pronunciation"></div>
-      <div class="definition" id="definition"></div>
-      <div class="example" id="example"></div>
-      
-      <button id="pronounceBtn" class="btn-primary">🔊 Pronounce</button>
-      <button id="nextBtn" class="btn-secondary">Next Word →</button>
-    </div>
-
-    <div class="progress">
-      <div class="progress-bar" id="progressBar"></div>
+  <div id="normalTab" class="normal-tab">
+    <div class="search-container">
+      <input type="text" id="searchBox" placeholder="Search Google or type a URL" />
     </div>
   </div>
 
