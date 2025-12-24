@@ -237,10 +237,9 @@ button:active {
 }
 
 .btn-skip {
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
+  border: 2px solid white;
 }
 
 .btn-skip:hover {
