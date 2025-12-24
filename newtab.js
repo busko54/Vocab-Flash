@@ -124,6 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize the extension
   init();
 
-  // Auto-hide vocab overlay after 7 seconds
-  setTimeout(hideOverlayShowSearch, 7000);
+  // Auto-hide vocab overlay after 5 seconds
+  setTimeout(hideOverlayShowSearch, 5000);
 });
