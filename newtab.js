@@ -109,9 +109,8 @@ function nextWord() {
 }
 
 function hideOverlayShowSearch() {
-  document.getElementById('vocabOverlay').classList.add('hidden');
-  document.getElementById('normalTab').classList.add('visible');
-  document.getElementById('searchBox').focus();
+  // Just redirect to Google instead of showing search box
+  window.location.href = 'https://www.google.com';
 }
 
 function shouldShowQuiz() {
